@@ -13,7 +13,6 @@ async function checkWeather(city) {
       document.querySelector(".weather").style.display = "none";
       return;  
     }
-
     const data = await response.json();
 
     document.querySelector(".city").innerHTML = data.name;
@@ -30,7 +29,6 @@ async function checkWeather(city) {
     } else if (data.weather[0].main == "Mist") {
       weatherIcon.src = "mist.png";
     }
-
     document.querySelector(".weather").style.display = "block";
     document.querySelector(".error").style.display = "none";
 
@@ -38,9 +36,13 @@ async function checkWeather(city) {
     console.error("Error fetching weather data:", error);
   }
 }
-
 searchBtn.addEventListener("click", () => {
   checkWeather(searchBox.value);
+});
+searchBox.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    checkWeather(searchBox.value);
+  }
 });
 
 
